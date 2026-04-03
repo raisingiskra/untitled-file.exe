@@ -5,131 +5,53 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>(sys.log="redacted").exe</title>
 <style>
-  /* Reset */
-  * { box-sizing: border-box; margin: 0; padding: 0; }
-
-  /* Layout */
-  html, body {
-    height: 100%;
-    background-color: #0a0a0a;
-    font-family: "Courier New", Courier, monospace;
-    color: #00ff00;
-    display: flex;
-    flex-direction: column;
-  }
-
+  /* Reset & basic layout */
+  * { box-sizing: border-box; margin:0; padding:0; }
+  html, body { height:100%; background:#0a0a0a; color:#00ff00; font-family: "Courier New", Courier, monospace; display:flex; flex-direction:column; }
   body::before {
-    content: "";
-    position: fixed;
-    top:0; left:0;
-    width:100%; height:100%;
-    background: url('static-noise.gif') repeat;
-    opacity: 0.03;
-    pointer-events: none;
+    content:""; position:fixed; top:0; left:0; width:100%; height:100%;
+    background:url('static-noise.gif') repeat; opacity:0.03; pointer-events:none;
   }
 
-  header.top-bar {
-    height: 40px;
-    padding: 10px;
-    border-bottom: 1px solid #006600;
-  }
+  header { height:40px; padding:10px; border-bottom:1px solid #006600; }
+  .container { display:flex; flex:1; overflow:hidden; }
+  nav { width:200px; border-right:1px solid #006600; padding:10px; }
+  nav a { display:block; color:#00ff00; text-decoration:none; margin:5px 0; transition:0.2s; }
+  nav a:hover { color:#66ff66; text-shadow:0 0 5px #00ff00; }
+  main { flex:1; padding:10px; overflow-y:auto; }
+  aside { width:200px; border-left:1px solid #006600; padding:10px; }
+  footer { height:20px; padding:5px 10px; border-top:1px solid #006600; font-size:12px; }
+  .bottom-right { position:absolute; bottom:10px; right:10px; font-size:12px; opacity:0.8; animation:flicker 2s infinite; }
 
-  .container {
-    display: flex;
-    flex: 1;
-    overflow: hidden;
-  }
-
-  nav.left-panel {
-    width: 200px;
-    border-right: 1px solid #006600;
-    padding: 10px;
-  }
-
-  nav.left-panel a {
-    display: block;
-    color: #00ff00;
-    text-decoration: none;
-    margin: 5px 0;
-    transition: 0.2s;
-  }
-
-  nav.left-panel a:hover {
-    color: #66ff66;
-    text-shadow: 0 0 5px #00ff00;
-  }
-
-  main.main-display {
-    flex: 1;
-    padding: 10px;
-    overflow-y: auto;
-  }
-
-  aside.right-panel {
-    width: 200px;
-    border-left: 1px solid #006600;
-    padding: 10px;
-  }
-
-  footer {
-    height: 20px;
-    padding: 5px 10px;
-    border-top: 1px solid #006600;
-    font-size: 12px;
-  }
-
-  .bottom-right {
-    position: absolute;
-    bottom: 10px;
-    right: 10px;
-    font-size: 12px;
-    opacity: 0.8;
-    animation: flicker 2s infinite;
-  }
-
-  /* Flicker animation */
-  @keyframes flicker {
-    0%, 19%, 21%, 23%, 25%, 54%, 56%, 100% { opacity: 0.8; }
-    20%, 22%, 24%, 55% { opacity: 0.3; }
-  }
-
-  /* Glitch effect */
-  .glitch {
-    display: inline-block;
-    animation: glitch-text 1s infinite;
-  }
-  @keyframes glitch-text {
-    0% { transform: translate(0px,0px); }
-    20% { transform: translate(-1px,1px); }
-    40% { transform: translate(1px,-1px); }
-    60% { transform: translate(-1px,0px); }
-    80% { transform: translate(1px,1px); }
-    100% { transform: translate(0px,0px); }
-  }
+  /* Flicker and glitch */
+  @keyframes flicker { 0%,19%,21%,23%,25%,54%,56%,100%{opacity:0.8;} 20%,22%,24%,55%{opacity:0.3;} }
+  .glitch { display:inline-block; animation:glitch-text 1s infinite; }
+  @keyframes glitch-text { 0%{transform:translate(0,0);}20%{transform:translate(-1px,1px);}40%{transform:translate(1px,-1px);}60%{transform:translate(-1px,0);}80%{transform:translate(1px,1px);}100%{transform:translate(0,0);} }
 </style>
 </head>
 <body>
 
-<header class="top-bar">
-  (sys.log="redacted").exe      STATUS: ACTIVE
-</header>
+<header>(sys.log="redacted").exe      STATUS: ACTIVE</header>
 
 <div class="container">
-  <nav class="left-panel">
+  <nav>
     <a href="console.html">[CONSOLE]</a>
     <a href="logs.html">[LOG]</a>
     <a href="warnings.html">[WARNINGS]</a>
-    <span>[HIDDEN FILES]</span>
+    <a href="#" id="hidden-files-link">[HIDDEN FILES]</a>
   </nav>
 
-  <main class="main-display">
+  <main>
     <p class="glitch">FRAGMENT 3/?? LOADING…</p>
     <p class="glitch">[ACCESS ATTEMPTED BY UNKNOWN]</p>
     <p class="glitch">COPY INITIATED…</p>
     <p class="glitch">[FRAGMENT LOST]</p>
+    <p class="glitch" style="opacity:0.1;">4721</p> <!-- Hidden 4-digit code subtly visible -->
+    <!-- Hint: Look at the faint numbers in the glitching fragments -->
+    <!-- Another clue: 4721 is safe to use, no corruption risk -->
   </main>
 
-  <aside class="right-panel">
+  <aside>
     <p>System ID: 47xJ-82</p>
     <p>Time: 03:17:42</p>
     <p>Process: ███</p>
@@ -137,13 +59,29 @@
   </aside>
 </div>
 
-<footer>
-  SYSTEM MESSAGES / ERRORS / TIPS
-</footer>
+<footer>SYSTEM MESSAGES / ERRORS / TIPS</footer>
+<div class="bottom-right">user.id="false?"</div>
 
-<div class="bottom-right">
-  user.id="false?"
-</div>
+<script>
+  // Spooky console log & alert on page load
+  window.addEventListener("load", () => {
+    console.log('While exploring this file, please have the source code open. It will help you safely explore the .exe without chance of corrupting your computer.');
+    alert('console.log("While exploring this file, please have the source code open. It will help you safely explore the .exe without chance of corrupting your computer.")');
+  });
+
+  // Hidden Files password logic
+  const hiddenCode = "4721";
+  document.getElementById("hidden-files-link").addEventListener("click", function(e){
+    e.preventDefault();
+    let input = prompt("Enter 4-digit password to access hidden files:");
+    if(input === hiddenCode){
+      alert("Access Granted! Redirecting...");
+      window.location.href = "hiddenfiles.html";
+    } else {
+      alert("Access Denied. Wrong code.");
+    }
+  });
+</script>
 
 </body>
 </html>
