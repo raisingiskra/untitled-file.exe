@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>System Warnings</title>
+<style>
+  html, body { margin:0; padding:0; height:100%; overflow:hidden; background:black; color:#00ff00; font-family:"Courier New", monospace; }
+  .bg-video {
+    position:fixed;
+    top:0; left:0;
+    width:100%; height:100%;
+    pointer-events:none;
+    z-index:-1;
+  }
+  .overlay {
+    position:relative;
+    z-index:1;
+    padding:20px;
+  }
+  .glitch {
+    display:inline-block;
+    color:#00ff00;
+    animation:glitch-text 1s infinite;
+  }
+  @keyframes glitch-text {
+    0%{transform:translate(0,0);}
+    20%{transform:translate(-1px,1px);}
+    40%{transform:translate(1px,-1px);}
+    60%{transform:translate(-1px,0);}
+    80%{transform:translate(1px,1px);}
+    100%{transform:translate(0,0);}
+  }
+</style>
+</head>
+<body>
+
+<!-- Replace YOUR_VIDEO_ID with your YouTube video ID -->
+<iframe class="bg-video" 
+        src="https://www.youtube.com/embed/Dzme0YSb_lY?si=Ba5bVIbBtc-aUTgH?autoplay=1&mute=1&loop=1&playlist=Dzme0YSb_lY?si=Ba5bVIbBtc-aUTgH"
+        frameborder="0" allow="autoplay; fullscreen">
+</iframe>
+
+<div class="overlay">
+  <p class="glitch">WARNING: SYSTEM INSTABILITY DETECTED</p>
+  <p class="glitch">All logs may contain errors. Trust cautiously.</p>
+  <p class="glitch">Some fragments exist only in the source.</p>
+  <p class="glitch">User attention required: anomalies detected.</p>
+</div>
+
+<!-- 
+ADMIN COMMENT 01: The system is observing. Some warnings are real, some are decoys.
+ADMIN COMMENT 02: Hidden codes exist in logs and overlay elements.
+ADMIN COMMENT 03: Binary fragments may lead to secret files. Cross-reference with 4721.
+ADMIN COMMENT 04: Some messages are intentionally misleading. Exercise caution.
+ADMIN COMMENT 05: Player interaction may alter system perception. Monitor all activity.
+-->
+
+</body>
+</html>
