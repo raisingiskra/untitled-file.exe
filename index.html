@@ -42,18 +42,18 @@
   </nav>
 
   <main>
-    <p class="glitch">FRAGMENT 3/?? LOADING…</p>
-    <p class="glitch">[ACCESS ATTEMPTED BY UNKNOWN]</p>
-    <p class="glitch">COPY INITIATED…</p>
-    <p class="glitch">[FRAGMENT LOST]</p>
-    <p class="glitch" style="opacity:0.1;">4721</p> <!-- Hidden 4-digit code subtly visible -->
+    <p class="glitch" data-original="FRAGMENT 3/?? LOADING…">FRAGMENT 3/?? LOADING…</p>
+    <p class="glitch" data-original="[ACCESS ATTEMPTED BY UNKNOWN]">[ACCESS ATTEMPTED BY UNKNOWN]</p>
+    <p class="glitch" data-original="COPY INITIATED…">COPY INITIATED…</p>
+    <p class="glitch" data-original="[FRAGMENT LOST]">[FRAGMENT LOST]</p>
+    <p class="glitch" data-original="4721" style="opacity:0.1;">4721</p> <!-- Hidden 4-digit code subtly visible -->
     <!-- Hint: Look at the faint numbers in the glitching fragments -->
-    <!-- Another clue: 4721 is safe to use, no corruption risk -->
+    <!-- Easter Egg: VGhpcyBpcyBhIHNlY3JldCBjb2RlLg== -->
   </main>
 
   <aside>
     <p>System ID: 47xJ-82</p>
-    <p>Time: 03:17:42</p>
+    <p id="system-time">Time: 03:17:42</p>
     <p>Process: ███</p>
     <p>Alerts: none</p>
   </aside>
@@ -61,6 +61,10 @@
 
 <footer>SYSTEM MESSAGES / ERRORS / TIPS</footer>
 <div class="bottom-right">user.id="false?"</div>
+
+<audio autoplay loop>
+  <source src="static-whisper.mp3" type="audio/mpeg">
+</audio>
 
 <script>
   // Spooky console log & alert on page load
@@ -81,6 +85,34 @@
       alert("Access Denied. Wrong code.");
     }
   });
+
+  // Dynamic System Time (slightly off)
+  function spookyTime() {
+    const now = new Date();
+    const hours = now.getHours().toString().padStart(2,'0');
+    const minutes = now.getMinutes().toString().padStart(2,'0');
+    const seconds = now.getSeconds().toString().padStart(2,'0');
+    return `${hours}:${minutes}:${seconds} 🔺`;
+  }
+  setInterval(() => {
+    document.getElementById('system-time').textContent = `Time: ${spookyTime()}`;
+  }, 1000);
+
+  // Glitch Text Random Character Flicker
+  function randomGlitch(text) {
+    return text.split('').map(c => Math.random() < 0.1 ? String.fromCharCode(33 + Math.floor(Math.random()*94)) : c).join('');
+  }
+  setInterval(() => {
+    document.querySelectorAll('.glitch').forEach(el => {
+      const original = el.getAttribute('data-original');
+      el.textContent = randomGlitch(original);
+    });
+  }, 500);
+
+  // Dynamic page title alerts
+  let titles = ["ERROR: SYSTEM COMPROMISED", "(sys.log='redacted').exe", "ACCESS DENIED"];
+  let i = 0;
+  setInterval(() => { document.title = titles[i % titles.length]; i++; }, 3000);
 </script>
 
 </body>
