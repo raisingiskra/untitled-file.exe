@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>console.exe</title>
+<style>
+  body { background:#0a0a0a; color:#00ff00; font-family: "Courier New", Courier, monospace; margin:0; padding:10px; }
+  #console-output { white-space: pre-wrap; line-height:1.2; }
+  #console-input { background:#0a0a0a; color:#00ff00; border:none; outline:none; width:100%; font-family: "Courier New", Courier, monospace; font-size:16px; }
+  .glitch { display:inline-block; animation:glitch-text 1s infinite; }
+  @keyframes glitch-text {
+    0%{transform:translate(0,0);}20%{transform:translate(-1px,1px);}40%{transform:translate(1px,-1px);}60%{transform:translate(-1px,0);}80%{transform:translate(1px,1px);}100%{transform:translate(0,0);}
+  }
+</style>
+</head>
+<body>
+
+<pre id="console-output">
+> SYSTEM CONSOLE LOADING...
+> READY.
+</pre>
+<input type="text" id="console-input" autocomplete="off" placeholder="Type command..." autofocus>
+
+<script>
+const output = document.getElementById('console-output');
+const input = document.getElementById('console-input');
+
+// Available commands and outputs
+const commands = {
+  HELP: `AVAILABLE COMMANDS:
+- HELP
+- LIST FILES
+- READ LOG <number>
+- ACCESS HIDDEN
+- EXIT`,
+  
+  "LIST FILES": `[FILES DETECTED]
+fragment1.log
+fragment2.log
+fragment3.log
+hidden.html
+system_notes.txt`,
+
+  "READ LOG 1": `[FRAGMENT 1/?? LOADING...]
+ACCESS ATTEMPTED BY UNKNOWN
+COPY INITIATED...
+[FRAGMENT LOST]`,
+
+  "READ LOG 2": `[FRAGMENT 2/??]
+WARNING: INTEGRITY COMPROMISED
+SYSTEM RESOURCES UNSTABLE
+4721 █▒▒▒▒`,
+
+  "READ LOG 3": `[FRAGMENT 3/??]
+Corruption spreading...
+BASE64 CODE: VGhpcyBpcyBhIHNlY3JldCBjb2RlLg==
+> Hint: decode with base64()`,
+
+  "ACCESS HIDDEN": `ERROR: ACCESS DENIED. PASSWORD REQUIRED.
+> Hint: check previous logs for numeric code.`,
+
+  EXIT: `> SESSION TERMINATED.`
+};
+
+// Handle user input
+input.addEventListener('keydown', function(e){
+  if(e.key === 'Enter'){
+    const command = input.value.trim().toUpperCase();
+    input.value = '';
+    
+    if(commands[command]){
+      appendToConsole(commands[command]);
+    } else if(command.startsWith("READ LOG")){
+      const logNum = command.split(" ")[2];
+      appendToConsole(`LOG ${logNum} NOT FOUND OR CORRUPTED.`);
+    } else {
+      appendToConsole(`UNKNOWN COMMAND: ${command}`);
+    }
+  }
+});
+
+function appendToConsole(text){
+  output.textContent += '\n' + text;
+  window.scrollTo(0, document.body.scrollHeight);
+}
+
+// Glitch effect for console text
+setInterval(() => {
+  const text = output.textContent;
+  output.textContent = text.split('').map(c => Math.random()<0.02 ? String.fromCharCode(33 + Math.floor(Math.random()*94)) : c).join('');
+}, 500);
+
+/* Easter egg hidden in comment
+   Hint for explorers: hidden Spotify track
+   https://open.spotify.com/track/EXAMPLECODE
+*/
+</script>
+
+</body>
+</html>
